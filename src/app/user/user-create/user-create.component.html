@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-between px-4 mt-4">
+    <div>
+        <h5 class="mb-0">Adicionar usuário</h5>
+        <p class="text-secondary">Aqui você adiciona e configura os usários que fazem parte da sua equipe</p>
+    </div>
+    <div>
+        <button mat-button type="button" (click)="confirmClose()">X</button>
+    </div>
+</div>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="form" autocomplete="off" novalidate (ngSubmit)="onSubmit()">
+
+        <div class="row mb-3">
+            <div class="col-6">
+                <label class="form-label">Nome</label>
+                <input matInput class="form-control" [formControlName]="'name'" [placeholder]="'Informe o nome'"
+                    required>
+                <mat-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
+                    Campo obrigatório
+                </mat-error>
+            </div>
+            <div class="col-6">
+                <label class="form-label">Sobrenome</label>
+                <input matInput class="form-control" [formControlName]="'surname'" [placeholder]="'Informe o surname'"
+                    required>
+                <mat-error *ngIf="form.get('surname')?.hasError('required') && form.get('surname')?.touched">
+                    Campo obrigatório
+                </mat-error>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-6">
+                <label class="form-label">Telefone <em class="text-muted">- opicional</em></label>
+                <input matInput class="form-control" [formControlName]="'phone'" [placeholder]="'Informe o telefone'"
+                    [inputMask]="phoneInputMask" required>
+            </div>
+            <div class="col-6">
+                <label class="form-label">E-mail corporativo</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon"
+                            class="text-secondary">mail</mat-icon>
+                    </span>
+                    <input type="text" class="form-control" [formControlName]="'email'"
+                        [placeholder]="'Informe o email'" aria-describedby="basic-addon1" required>
+                </div>
+                <mat-error *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">
+                    Campo obrigatório
+                </mat-error>
+                <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">
+                    E-mail inválido
+                </mat-error>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <label class="form-label">Perfil de acesso</label>
+
+                <ng-multiselect-dropdown [placeholder]="'Selecione o perfil'" [settings]="dropdownSettings"
+                    [data]="dropdownList" [(ngModel)]="selectedItems" [formControlName]="'profile'">
+                </ng-multiselect-dropdown>
+
+                <mat-error *ngIf="form.get('profile')?.hasError('required') && form.get('profile')?.touched">
+                    Campo obrigatório
+                </mat-error>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-6">
+                <label class="form-label">Idioma</label>
+                <select class="form-select" aria-label="Default select example" [formControlName]="'language'" required>
+                    <option value="0">Portugues BR</option>
+                    <option value="1">Inglês US</option>
+                    <option value="2">Espanhol MX</option>
+                    <option value="3">Francês FR</option>
+                    <option value="4">Alemão DE</option>
+                </select>
+                <mat-error *ngIf="form.get('language')?.hasError('required') && form.get('language')?.touched">
+                    Campo obrigatório
+                </mat-error>
+            </div>
+            <div class="col-6">
+                <label>Contato preferencial <em class="text-muted">- opicional</em></label>
+                <div class="d-block mt-2">
+                    <mat-radio-group aria-label="Select an option" [formControlName]="'preferredContact'">
+                        <mat-radio-button value="email">E-mail</mat-radio-button>
+                        <mat-radio-button value="phone">Telefone</mat-radio-button>
+                        <mat-radio-button value="todos">Todos</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-2">
+            <div class="w-100 px-2">
+                <button class="btn btn-light w-100" type="button" (click)="confirmClose()">Fechar</button>
+            </div>
+            <div class="w-100 px-2">
+                <button class="btn w-100 color-btn" cdkFocusInitial type="submit">Enviar convite</button>
+            </div>
+        </div>
+
+    </form>
+</mat-dialog-content>
