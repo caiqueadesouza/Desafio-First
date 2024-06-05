@@ -35,6 +35,6 @@ Na implementação, foi priorizado a criação de código limpo e legível, segu
 
 Criado alguns componentes para dividir a interface do usuário em pequenos blocos independentes e reutilizáveis.
 
-# Armazenamento dos Baralhos em Memória
+# Armazenamento dos Ussuários em Memória
 
 Esses métodos foi uma maneira simples de gerenciar operações (criar, ler) em memória dentro da aplicação Angular. O uso de Observable permite uma comunicação reativa e assíncrona entre componentes que dependem desses dados.
